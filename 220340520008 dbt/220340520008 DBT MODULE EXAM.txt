@@ -1,0 +1,220 @@
+
+-----------------------------------------------------------
+  **  SECTION 1**
+-----------------------------------------------------------------
+q.1 
+create table DEPT
+ (
+ DEPTNO int(2),
+ DENAME VARCHAR(15),
+ LOC VARCHAR(10)
+ );
+ 
+ insert into DEPT (DEPTNO,DENAME,LOC) values(10,'ACCOUNTING','NEW YORK'),
+                     (20,'RESEARCH','DALLAS'),
+                     (30,'SALES','CHICAGO'),
+                     (40,'OPERATIONS','BOSTON');
+ 
+select * from DEPT;
+drop table DEPT;
+
+output:
+# DEPTNO, DENAME, LOC
+'10', 'ACCOUNTING', 'NEW YORK'
+'20', 'RESEARCH', 'DALLAS'
+'30', 'SALES', 'CHICAGO'
+'40', 'OPERATIONS', 'BOSTON'
+------------------------------------------------------------------------------
+
+q.2
+create table EMP
+(
+EMPNO INT(4),
+ENAME VARCHAR(10),
+JOB VARCHAR(9),
+HIREDATE DATE,
+SAL FLOAT(7,2),
+COMM FLOAT(7,2),
+DEPTNO INT(2)
+);
+
+INSERT INTO EMP (EMPNO,ENAME,JOB,HIREDATE,SAL,COMM,DEPTNO) VALUES(7839,'KING','MANAGER','1991-11-17',5000,NULL,10),
+                          					(7698,'BLAKE','CLERK','1981-05-01',2850,NULL,30),
+                                                                (7782,'CLARK','MANAGER','1981-06-09',2450,NULL,10),
+                                                                (7566,'JONES','CLERK','1981-04-02',2975,NULL,20),
+                                                                (7654,'MARTIN','SALESMAN','1981-09-28',1250,1400,30),
+                                                                 (7499,'ALLEN','SALESMAN','1981-02-20',1600,300,30);
+                                                                      
+					SELECT * FROM EMP;
+
+
+OUTPUT:
+
+# EMPNO, ENAME, JOB, HIREDATE, SAL, COMM, DEPTNO
+'7839', 'KING', 'MANAGER', '1991-11-17', '5000.00', NULL, '10'
+'7698', 'BLAKE', 'CLERK', '1981-05-01', '2850.00', NULL, '30'
+'7782', 'CLARK', 'MANAGER', '1981-06-09', '2450.00', NULL, '10'
+'7566', 'JONES', 'CLERK', '1981-04-02', '2975.00', NULL, '20'
+'7654', 'MARTIN', 'SALESMAN', '1981-09-28', '1250.00', '1400.00', '30'
+'7499', 'ALLEN', 'SALESMAN', '1981-02-20', '1600.00', '300.00', '30'
+
+------------------------------------------------------------  
+ Q.3
+     SELECT ENAME FROM emp
+    WHERE SAL BETWEEN 2500 AND 5000;
+
+OUTPUT:  
+# ENAME
+'KING'
+'BLAKE'
+'JONES'
+-----------------------------------
+
+Q.4
+SELECT ENAME FROM EMP ORDER BY ENAME DESC;
+
+OUTPUT:
+
+# ENAME
+'MARTIN'
+'KING'
+'JONES'
+'CLARK'
+'BLAKE'
+'ALLEN'
+-------------
+
+Q.5
+ SELECT LOWER(JOB) FROM EMP;
+
+OUTPUT:
+# LOWER(JOB)
+'manager'
+'clerk'
+'manager'
+'clerk'
+'salesman'
+'salesman'
+
+
+
+-----------------------------
+Q.6
+
+     SELECT ENAME ,LENGTH(ENAME) FROM EMP
+     AS LENGTH_OF_ENAME;
+
+OUTPUT:
+# ENAME, LENGTH(ENAME)
+'KING', '4'
+'BLAKE', '5'
+'CLARK', '5'
+'JONES', '5'
+'MARTIN', '6'
+------------------------------
+
+Q.7
+ SELECT DEPTNO,COUNT(*) FROM emp GROUP BY DEPTNO;
+
+OUTPUT:
+# DEPTNO, COUNT(*)
+'10', '2'
+'30', '3'
+'20', '1'
+---------------------
+Q.8
+
+ SELECT DEPT.DENAME , EMP.ENAME FROM EMP, DEPT
+     WHERE DEPT.DEPTNO = EMP.DEPTNO;
+
+OUTPUT: 
+# DENAME, ENAME
+'ACCOUNTING', 'KING'
+'SALES', 'BLAKE'
+'ACCOUNTING', 'CLARK'
+'RESEARCH', 'JONES'
+'SALES', 'MARTIN'
+'SALES', 'ALLEN'
+
+-----------------------------
+Q.9
+SELECT POSITION("AR" IN ENAME) FROM EMP;
+
+OUTPUT:
+# POSITION("AR" IN ENAME)
+'0'
+'0'
+'3'
+'0'
+'2'
+'0'
+--------------------------------
+Q.10
+
+       SELECT ENAME,SAL*0.2 AS 'HRA' FROM EMP;
+
+OUTPUT:
+
+# ENAME, HRA
+'KING', '1000.00'
+'BLAKE', '570.00'
+'CLARK', '490.00'
+'JONES', '595.00'
+'MARTIN', '250.00'
+'ALLEN', '320.00'
+
+------------------------------
+  **section 2 **
+---------------------------------------------
+q.1
+
+   CREATE TABLE TEMPP
+     (
+     STRING1 VARCHAR(100),
+     SREING2 VARCHAR(100),
+     MSG VARCHAR(100)
+     );
+     
+     delimiter //
+     create procedure PROC1(STRING1 VARCHAR(100),
+     SREING2 VARCHAR(100))
+     begin
+      declare num int;
+      declare msg varchar(100);
+      select locate (string1,strin2) from num;
+     if num > 0 then 
+      insert into tempp values(string1,string2,'STRING1 INSIDE STRING2');
+     else
+      insert into tempp values(string1,string2,'STRING1 NOT INSIDE STRING2');
+     end if;
+      select * from emp;
+      
+     end;  //
+      delimiter ;
+     
+
+---------------------------------------------------
+q.2
+
+   delimiter //
+     create function FUNC1(side1 int ,side2 int ,side3 int)
+     returns varchar(100)
+     deterministic
+      begin
+       if 
+         side1 + side2 > side3 and side3 + side1 > side2 and side2 + side3 > side1 then return 'TRUE';
+       else return 'FALSE';  
+    end if;
+     end; //
+     delimiter ;
+
+   ------------------------------------------
+
+
+
+
+
+
+
+
+
